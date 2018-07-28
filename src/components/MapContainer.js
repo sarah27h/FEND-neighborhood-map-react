@@ -78,7 +78,7 @@ export class MapContainer extends Component {
         console.log(this.state.markers);
 
         return(
-            <div>
+            <div className="mapWrapper">
                 <div id="map" style={{height: "600px"}}>
                 </div>
             </div>

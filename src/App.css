@@ -1,4 +1,6 @@
 .App {
+  display: flex;
+  flex-wrap: nowrap;
   text-align: center;
 }
 
@@ -25,4 +27,61 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+/* start MapContainer component */
+.mapWrapper {
+  width: 70%;
+  height: 100%;
+  -ms-flex-order: 3;
+  order: 3;
+  position: absolute;
+  right: 0;
+}
+
+.mapWrapper .info_window {
+  z-index: 99999;
+  background-color: rgb(131, 0, 0);
+}
+
+
+/* start LocationFilter component */
+.location_filter {
+  padding: 20px;
+  background: #eee;
+  width: 30%;
+  height: 100%;
+  /* transform: translate(-300px, 0); */
+  -ms-flex-order: 2;
+  order: 2;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+}
+
+.location_filter h2 {
+  margin-bottom: 15px;
+}
+
+
+.location_filter .search_field {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.location_filter .location_list {
+  list-style: none;
+  text-align: left;
+}
+
+.location_filter .location_item {
+  margin: 10px 0;
+  padding: 10px;
+  background: #fff;
 }
