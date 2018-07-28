@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MapContainer from './components/MapContainer'
-
-
+import LocationFilter from './components/LocationFilter'
 
 class App extends Component {
 
@@ -27,15 +26,23 @@ class App extends Component {
     ]
   }
 
+  
+
   render() {
+    // console.log(this.state.markers);
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <h1 className="App-title">Museum Guide</h1>
-        </header>
+        </header> */}
         <MapContainer 
           locations={this.state.locations}
         />
+
+        <LocationFilter 
+          locations={this.state.locations}
+        />
+
       </div>
     );
   }

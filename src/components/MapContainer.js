@@ -58,7 +58,7 @@ export class MapContainer extends Component {
             }
 
           } else {
-            this.props.onError()
+            // this.props.onError()
           } 
         }
       }
