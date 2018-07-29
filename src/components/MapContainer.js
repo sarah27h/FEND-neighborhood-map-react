@@ -29,23 +29,25 @@ export class MapContainer extends Component {
                     map: map,
                     position: {lat: location.location.lat, lng: location.location.lng},
                     title: location.title,
-                    id: index,
-                    animation: window.google.maps.Animation.Drop
+                    id: index
                 });
 
-            
-            
                 // add click listener for every marker
                 marker.addListener('click', function() {
-                    console.log(marker.get('id'));
-                    console.log(marker.title)
+                    console.log(marker.get('id'), marker);
+                    console.log(marker.title);
+                    
                     makeInfoWindow(this, infowindow);
-                    // if (typeof this.props.clickedLi !== 'undefined') {
-                    //     console.log(`clickedLi ${this.props.clickedLi}`);
-                    // }
+
+                    // animate clicked marker
+                    marker.setAnimation(window.google.maps.Animation.BOUNCE);
+                    // stop animation
+                    setTimeout(function() { 
+                        marker.setAnimation(null); 
+                    }, 1500);
                     
                 })
-
+                
                 // add every marker to this.state.markers array
                 // this.setState( prevState => (new: prevState.old.concat(marker)) )
                 this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
