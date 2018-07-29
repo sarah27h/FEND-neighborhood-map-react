@@ -38,6 +38,7 @@ export class MapContainer extends Component {
                 // add click listener for every marker
                 marker.addListener('click', function() {
                     console.log(marker.get('id'));
+                    console.log(marker.title)
                     makeInfoWindow(this, infowindow);
                     // if (typeof this.props.clickedLi !== 'undefined') {
                     //     console.log(`clickedLi ${this.props.clickedLi}`);
@@ -74,14 +75,14 @@ export class MapContainer extends Component {
 
       
     
-      componentDidMount () {
-        const { isScriptLoaded, isScriptLoadSucceed } = this.props
-        if (isScriptLoaded && isScriptLoadSucceed) {
-            console.log(this.props.clickedLi);
-            console.log(this.state.markers);
+    //   componentDidMount () {
+    //     const { isScriptLoaded, isScriptLoadSucceed } = this.props
+    //     if (isScriptLoaded && isScriptLoadSucceed) {
+    //         console.log(this.props.clickedLi);
+    //         console.log(this.state.markers);
             
-        }
-      }
+    //     }
+    //   }
       
     
     render() {
@@ -102,7 +103,7 @@ export class MapContainer extends Component {
         // }
         return(
             <div className="mapWrapper">
-                <div id="map" style={{height: "600px"}}>
+                <div id="map" style={{height: "600px"}} onClick = {(e) => {this.props.onMarkerclick(e.target)}}>
                 </div>
             </div>
         )
