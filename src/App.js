@@ -23,10 +23,19 @@ class App extends Component {
       {title: 'Museum of Egyptian Modern Art', location: {lat: 30.043884, lng: 31.224628}},
       {title: 'Mahmoud Moukhtar Museum', location: {lat: 30.040948, lng: 31.222923}},
       {title: 'National Military Museum', location: {lat: 30.034995, lng: 31.261564}}
-    ]
+    ],
+    clickedLi : undefined
   }
 
-  
+  handleClickedLi = (index, target) => {
+    this.setState({clickedLi : index, clickedLi : target.id}, () => {
+      console.log(target);
+      console.log(`clicked li index is ${index}`);
+      console.log(target.id);
+      console.log(document.getElementById('gmimap' + this.state.clickedLi.toString()));
+      document.getElementById('gmimap' + this.state.clickedLi.toString()).click();                             
+    })
+}
 
   render() {
     // console.log(this.state.markers);
@@ -41,6 +50,8 @@ class App extends Component {
 
         <LocationFilter 
           locations={this.state.locations}
+          onClicked={this.handleClickedLi}
+          clicked={this.props.clicked}
         />
 
       </div>
