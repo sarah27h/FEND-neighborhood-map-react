@@ -24,26 +24,34 @@ export class MapContainer extends Component {
             let infowindow = new window.google.maps.InfoWindow();
 
             // add marker to every location
-            this.props.locations.map((location) => {
-            let marker = new window.google.maps.Marker({
-                map: map,
-                position: {lat: location.location.lat, lng: location.location.lng},
-                title: location.title,
-                animation: window.google.maps.Animation.Drop
-            });
+            this.props.locations.map((location, index) => {
+                let marker = new window.google.maps.Marker({
+                    map: map,
+                    position: {lat: location.location.lat, lng: location.location.lng},
+                    title: location.title,
+                    id: index,
+                    animation: window.google.maps.Animation.Drop
+                });
+
             
-            // add click listener for every marker
-            marker.addListener('click', function() {
-                makeInfoWindow(this, infowindow);
-            })
+            
+                // add click listener for every marker
+                marker.addListener('click', function() {
+                    console.log(marker.get('id'));
+                    makeInfoWindow(this, infowindow);
+                    // if (typeof this.props.clickedLi !== 'undefined') {
+                    //     console.log(`clickedLi ${this.props.clickedLi}`);
+                    // }
+                    
+                })
 
-            // add every marker to this.state.markers array
-            // this.setState( prevState => (new: prevState.old.concat(marker)) )
-            this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
-
-            // DON'T mutate the state
-            // means to update the state use setState()
-            // this.state.markers.push(marker)              
+                // add every marker to this.state.markers array
+                // this.setState( prevState => (new: prevState.old.concat(marker)) )
+                this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
+                            
+                // DON'T mutate the state
+                // means to update the state use setState()
+                // this.state.markers.push(marker)              
             })
             
             // add a changable content based on which marker is clicked
@@ -55,6 +63,7 @@ export class MapContainer extends Component {
                 // infowindow.addListener('closeclick', function() {
                 //     infowindow.setMarker(null);
                 // })
+                
             }
 
           } else {
@@ -65,18 +74,32 @@ export class MapContainer extends Component {
 
       
     
-    //   componentDidMount () {
-    //     const { isScriptLoaded, isScriptLoadSucceed } = this.props
-    //     if (isScriptLoaded && isScriptLoadSucceed) {
-    //         this.setState({ markers : this.state.markers });
-    //     }
-    //   }
-    
+      componentDidMount () {
+        const { isScriptLoaded, isScriptLoadSucceed } = this.props
+        if (isScriptLoaded && isScriptLoadSucceed) {
+            console.log(this.props.clickedLi);
+            console.log(this.state.markers);
+            
+        }
+      }
+      
     
     render() {
         console.log(this.props.locations);
         console.log(this.state.markers);
+        // console.log(`clickedLi ${this.props.clickedLi}`);
 
+        console.log(`clickedLi ${this.props.clickedLi}`);
+        // if (typeof this.props.clickedLi !== 'undefined') {
+        //     let clickedMarker = this.state.markers.filter((marker) => marker.get('id') === this.props.clickedLi) 
+        //     console.log(`clickedLi ${this.props.clickedLi}`);
+        //     console.log(document.getElementById('gmimap' + this.props.clickedLi.toString()));
+        //     document.getElementById('gmimap' + this.props.clickedLi.toString()).click();
+        //     console.log('clickedMarker');
+        //     console.log(clickedMarker[0]);
+            
+            
+        // }
         return(
             <div className="mapWrapper">
                 <div id="map" style={{height: "600px"}}>

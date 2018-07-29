@@ -46,6 +46,7 @@ class App extends Component {
         </header> */}
         <MapContainer 
           locations={this.state.locations}
+          clickedLi={this.state.clickedLi}
         />
 
         <LocationFilter 
