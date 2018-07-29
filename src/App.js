@@ -27,19 +27,24 @@ class App extends Component {
     clickedLi : undefined
   }
 
+  markerclicked = (target) => {
+      console.log(target);  
+  }
+
   handleClickedLi = (index, target) => {
     this.setState({clickedLi : index, clickedLi : target.id}, () => {
       console.log(target);
       console.log(`clicked li index is ${index}`);
       console.log(target.id);
       console.log(document.getElementById('gmimap' + this.state.clickedLi.toString()));
-      document.getElementById('gmimap' + this.state.clickedLi.toString()).click();                             
+      //simulate click on marker to open infowindow
+      document.getElementById('gmimap' + this.state.clickedLi.toString()).children[0].click();                             
     })
 }
 
   render() {
-    // console.log(this.state.markers);
-    return (
+
+        return (
       <div className="App">
         {/* <header className="App-header">
           <h1 className="App-title">Museum Guide</h1>
@@ -47,6 +52,7 @@ class App extends Component {
         <MapContainer 
           locations={this.state.locations}
           clickedLi={this.state.clickedLi}
+          onMarkerclick={this.markerclicked}
         />
 
         <LocationFilter 
