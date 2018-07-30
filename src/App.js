@@ -25,12 +25,18 @@ class App extends Component {
       {title: 'Mahmoud Moukhtar Museum', location: {lat: 30.040948, lng: 31.222923}},
       {title: 'National Military Museum', location: {lat: 30.034995, lng: 31.261564}}
     ],
-    clickedLi : undefined
+    clickedLi : undefined,
+    query: ''
   }
 
   markerclicked = (target) => {
       console.log(target);  
   }
+
+updateQuery = (query) => {
+  this.setState({query : query},
+  )
+}
 
   handleClickedLi = (index, target) => {
     this.setState({clickedLi : index, clickedLi : target.id}, () => {
@@ -58,7 +64,10 @@ class App extends Component {
 
         <div className="locations_section">
 
-          <LocationFilter />
+          <LocationFilter 
+            onUpdateQuery={this.updateQuery}
+            query={this.state.query}
+          />
 
           <LocationsList 
             locations={this.state.locations}
