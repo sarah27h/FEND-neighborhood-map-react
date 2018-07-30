@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import MapContainer from './components/MapContainer'
 import LocationFilter from './components/LocationFilter'
+import LocationsList from './components/LocationsList'
 
 class App extends Component {
 
@@ -55,11 +56,18 @@ class App extends Component {
           onMarkerclick={this.markerclicked}
         />
 
-        <LocationFilter 
-          locations={this.state.locations}
-          onClicked={this.handleClickedLi}
-          clicked={this.props.clicked}
-        />
+        <div className="locations_section">
+
+          <LocationFilter />
+
+          <LocationsList 
+            locations={this.state.locations}
+            onClicked={this.handleClickedLi}
+            clicked={this.props.clicked}
+          />
+
+        </div>
+        
 
       </div>
     );
