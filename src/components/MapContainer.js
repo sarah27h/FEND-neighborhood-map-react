@@ -9,6 +9,14 @@ export class MapContainer extends Component {
         markers : []
     }
     
+    /* This methode base on this stackoverflow question and
+    * react-async-script-loader package
+    * https://www.npmjs.com/package/react-async-script-loader
+    
+    https://stackoverflow.com/questions/41709765/how
+    -to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require 
+     * it help me to load Maps async
+    */
     componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
         if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
 
@@ -36,7 +44,7 @@ export class MapContainer extends Component {
                 marker.addListener('click', function() {
                     console.log(marker.get('id'), marker);
                     console.log(marker.title);
-                    
+
                     makeInfoWindow(this, infowindow);
 
                     // animate clicked marker
