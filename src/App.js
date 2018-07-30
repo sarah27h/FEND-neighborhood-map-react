@@ -35,10 +35,25 @@ class App extends Component {
       console.log(target);  
   }
 
-updateQuery = (query) => {
-  this.setState({query : query},
-  )
-}
+  updateQuery = (query) => {
+    let filteredLocations
+
+    this.setState({query : query}, () => {
+
+        if(this.state.query) {
+          const match = new RegExp(escapeRegExp(this.state.query), 'i');
+          filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
+          this.setState({locations : filteredLocations});
+          console.log(filteredLocations);
+          
+        } else {
+          filteredLocations = this.state.locations;
+          console.log(filteredLocations);
+          this.setState({locations : filteredLocations});
+        }
+
+      })
+  }
 
   handleClickedLi = (index, target) => {
     this.setState({clickedLi : index, clickedLi : target.id}, () => {
@@ -47,9 +62,10 @@ updateQuery = (query) => {
       console.log(target.id);
       console.log(document.getElementById('gmimap' + this.state.clickedLi.toString()));
       //simulate click on marker to open infowindow
-      document.getElementById('gmimap' + this.state.clickedLi.toString()).children[0].click();                             
+      document.getElementById('gmimap' + this.state.clickedLi.toString()).children[0].click();
+                                 
     })
-}
+  }
 
   render() {
 
@@ -58,10 +74,12 @@ updateQuery = (query) => {
         {/* <header className="App-header">
           <h1 className="App-title">Museum Guide</h1>
         </header> */}
+
         <MapContainer 
           locations={this.state.locations}
           clickedLi={this.state.clickedLi}
           onMarkerclick={this.markerclicked}
+          query={this.state.query}
         />
 
         <div className="locations_section">
