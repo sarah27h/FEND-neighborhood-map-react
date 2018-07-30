@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import escapeRegExp from 'escape-string-regexp'
 import scriptLoader from 'react-async-script-loader';
 
 
@@ -21,17 +22,21 @@ export class MapContainer extends Component {
         if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
 
           if (isScriptLoadSucceed) {
-
+            
             // create our map add its center
             let map = new window.google.maps.Map(document.getElementById('map'), { 
                 center: {lat: 30.052635, lng: 31.236145},
                 zoom: 12
             });
 
+            console.log(this.props.locations);
             // create infowindow to add it later to every marker when clicked
             let infowindow = new window.google.maps.InfoWindow();
 
             // add marker to every location
+            
+            this.setState( prevState => ({locations : prevState.locations}) )
+
             this.props.locations.map((location, index) => {
                 let marker = new window.google.maps.Marker({
                     map: map,
@@ -59,7 +64,7 @@ export class MapContainer extends Component {
                 // add every marker to this.state.markers array
                 // this.setState( prevState => (new: prevState.old.concat(marker)) )
                 this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
-                            
+                          
                 // DON'T mutate the state
                 // means to update the state use setState()
                 // this.state.markers.push(marker)              
@@ -82,35 +87,28 @@ export class MapContainer extends Component {
           } 
         }
       }
-
-      
-    
-    //   componentDidMount () {
-    //     const { isScriptLoaded, isScriptLoadSucceed } = this.props
-    //     if (isScriptLoaded && isScriptLoadSucceed) {
-    //         console.log(this.props.clickedLi);
-    //         console.log(this.state.markers);
-            
-    //     }
-    //   }
       
     
     render() {
+        
+        let filteredMarkers = [];
+
         console.log(this.props.locations);
         console.log(this.state.markers);
-        // console.log(`clickedLi ${this.props.clickedLi}`);
+        console.log(this.props.query);
 
-        console.log(`clickedLi ${this.props.clickedLi}`);
-        // if (typeof this.props.clickedLi !== 'undefined') {
-        //     let clickedMarker = this.state.markers.filter((marker) => marker.get('id') === this.props.clickedLi) 
-        //     console.log(`clickedLi ${this.props.clickedLi}`);
-        //     console.log(document.getElementById('gmimap' + this.props.clickedLi.toString()));
-        //     document.getElementById('gmimap' + this.props.clickedLi.toString()).click();
-        //     console.log('clickedMarker');
-        //     console.log(clickedMarker[0]);
+        if(this.props.query) {
+            const match = new RegExp(escapeRegExp(this.props.query), 'i');
+            filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
+            filteredMarkers.map((marker) =>marker.setVisible(false));
+  
+            console.log(filteredMarkers);
             
-            
-        // }
+          } else {
+            filteredMarkers = this.state.markers;
+            console.log(filteredMarkers);
+          }
+  
         return(
             <div className="mapWrapper">
                 <div id="map" style={{height: "600px"}} onClick = {(e) => {this.props.onMarkerclick(e.target)}}>
