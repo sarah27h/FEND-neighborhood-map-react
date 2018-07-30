@@ -28,7 +28,8 @@ class App extends Component {
       {title: 'National Military Museum', location: {lat: 30.034995, lng: 31.261564}}
     ],
     clickedLi : undefined,
-    query: ''
+    query: '',
+    filteredLocations : []
   }
 
   markerclicked = (target) => {
@@ -43,13 +44,18 @@ class App extends Component {
         if(this.state.query) {
           const match = new RegExp(escapeRegExp(this.state.query), 'i');
           filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
-          this.setState({locations : filteredLocations});
-          console.log(filteredLocations);
+          this.setState({filteredLocations : filteredLocations}, () => {
+            console.log(this.state.filteredLocations);
+            console.log(this.state.locations);
+          });
           
-        } else {
-          filteredLocations = this.state.locations;
-          console.log(filteredLocations);
-          this.setState({locations : filteredLocations});
+          
+        } else if (this.state.query === '') {
+          this.setState({filteredLocations : this.state.locations}, () => {
+            console.log(this.state.filteredLocations);
+            console.log(this.state.locations);
+          });
+          
         }
 
       })
@@ -93,6 +99,8 @@ class App extends Component {
             locations={this.state.locations}
             onClicked={this.handleClickedLi}
             clicked={this.props.clicked}
+            query={this.state.query}
+            filteredLocations={this.state.filteredLocations}
           />
 
         </div>

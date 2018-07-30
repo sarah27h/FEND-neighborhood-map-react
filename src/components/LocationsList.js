@@ -7,24 +7,47 @@ export class LocationsList extends Component {
   
       console.log(this.props.locations);
   
-      return (
-          <div className="list_wrapper">
+      if(this.props.query && this.props.filteredLocations.length < 15) {
+            return (
+                <div className="list_wrapper">
 
-                <ol className="location_list">
-                    {this.props.locations.map((location, index) =>
+                        <ol className="location_list">
+                            {this.props.filteredLocations.map((location, index) =>
 
-                        <li className="location_item" id={index} key={index} 
-                            onClick={(e) => (this.props.onClicked(index, e.target))}>
+                                <li className="location_item" id={index} key={index} 
+                                    onClick={(e) => (this.props.onClicked(index, e.target))}>
+                                    
+                                    {location.title}
+
+                                </li>
                             
-                            {location.title}
+                        )}
+                        </ol>
 
-                        </li>
-                       
-                   )}
-                </ol>
+                </div>
+            )
+        } else {
 
-          </div>
-      )
+            return (
+                <div className="list_wrapper">
+
+                        <ol className="location_list">
+
+                            {this.props.locations.map((location, index) =>
+
+                                <li className="location_item" id={index} key={index} 
+                                    onClick={(e) => (this.props.onClicked(index, e.target))}>
+                                    
+                                    {location.title}
+
+                                </li>
+                            
+                            )}
+                        </ol>
+
+                </div>
+            )
+        }
     }
 }
 
