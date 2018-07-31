@@ -57,6 +57,7 @@ class App extends Component {
       const match = new RegExp(escapeRegExp(this.state.query), 'i');
 
       if(this.state.query !== '') {
+
         // add matched markers title to query to filteredMarkers and show them
         filteredMarkers = this.state.markers.filter( (marker) => (match.test(marker.title)));
         filteredMarkers.map((marker) => marker.setVisible(true));
@@ -81,7 +82,7 @@ class App extends Component {
           
       } else if (this.state.query === '') {
         // updated filteredLocations state to hold all locations
-        this.setState({filteredLocations : this.state.locations}, () => {
+        this.setState({filteredLocations : this.state.locations, filteredMarkers : this.state.markers}, () => {
           // show all markers when query is empty
           this.state.markers.map((marker) =>marker.setVisible(true));
           console.log(this.state.filteredLocations);
@@ -99,9 +100,16 @@ class App extends Component {
       let liTitle = target.innerHTML;
       let targetMarker = this.state.markers.filter((marker) => marker.title === liTitle);
       console.log(targetMarker[0].id);
+      console.log(targetMarker[0].title);
+    
       //simulate click on marker to open infowindow
-      document.getElementById('gmimap' + targetMarker[0].id).children[0].click();
-
+      let areas = document.querySelectorAll('area');
+      areas.forEach(function(area) {
+        console.log(area);
+        if (area.getAttribute('title') === targetMarker[0].title){
+          area.click();
+        }
+      });
     })
   }
 
