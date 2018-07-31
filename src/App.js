@@ -38,48 +38,57 @@ class App extends Component {
       console.log(target);  
   }
 
+  // store markers in markers state property
   updateMarkers = (markers) => {
-    this.setState({ markers : markers })
-    console.log(this.props.markers);
+    this.setState({ markers : markers }, () => {
+      console.log(this.state.markers);
+    })
 
   }
 
+  // add filter functionality for locations and markers depend on query state
   updateQuery = (query) => {
     let filteredLocations;
     let filteredMarkers;
 
     this.setState({query : query}, () => {
 
-        if(this.state.query !== '') {
-          const match = new RegExp(escapeRegExp(this.state.query), 'i');
-          filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
+      const match = new RegExp(escapeRegExp(this.state.query), 'i');
+      if(this.state.query !== '') {
+        
+        // add matched markers title to query to filteredMarkers and show them
+        filteredMarkers = this.state.markers.filter( (marker) => (match.test(marker.title)));
+        filteredMarkers.map((marker) => marker.setVisible(true));
 
-          console.log(this.state.markers);          
+        // add not matched markers title to query to filteredMarkers and hide them
+        filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
+        filteredMarkers.map((marker) => marker.setVisible(false));
 
-          filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
-          filteredMarkers.map((marker) => marker.setVisible(false));
+        // add matched location title to query to filteredLocations
+        filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
+        
+        console.log(this.state.markers);
+        console.log(filteredMarkers);
 
-          console.log(filteredMarkers);
-          this.setState({filteredLocations : filteredLocations, filteredMarkers : filteredMarkers}, () => {
-            filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
-            filteredMarkers.map((marker) => marker.setVisible(true));
-            console.log(this.state.filteredMarkers);
-            console.log(this.state.filteredLocations);
-            console.log(this.state.locations);
-          });
-
+        // updated filteredLocations state
+        this.setState({filteredLocations : filteredLocations}, () => {
+          console.log(this.state.filteredMarkers);
+          console.log(this.state.filteredLocations);
+          console.log(this.state.locations);
+        });  
           
+      } else if (this.state.query === '') {
+        // updated filteredLocations state to hold all locations
+        this.setState({filteredLocations : this.state.locations}, () => {
+          // show all markers when query is empty
+          this.state.markers.map((marker) =>marker.setVisible(true));
+          console.log(this.state.filteredLocations);
+          console.log(this.state.locations);
+        });
           
-        } else if (this.state.query === '') {
-          this.setState({filteredLocations : this.state.locations, filteredMarkers : this.state.markers}, () => {
-            this.state.markers.map((marker) =>marker.setVisible(true));
-            console.log(this.state.filteredLocations);
-            console.log(this.state.locations);
-          });
-          
-        }
+      }
 
-      })
+    })
   }
 
   handleClickedLi = (index, target) => {
