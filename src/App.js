@@ -66,8 +66,8 @@ class App extends Component {
         filteredMarkers.map((marker) => marker.setVisible(false));
 
         // add matched location title to query to filteredLocations
-        filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
         
+        filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
         console.log(this.state.markers);
         console.log(filteredMarkers);
 
@@ -76,7 +76,7 @@ class App extends Component {
           console.log(this.state.filteredMarkers);
           console.log(this.state.filteredLocations);
           console.log(this.state.locations);
-        });  
+        });
           
       } else if (this.state.query === '') {
         // updated filteredLocations state to hold all locations
@@ -93,22 +93,20 @@ class App extends Component {
   }
 
   handleClickedLi = (index, target) => {
-    this.setState({clickedLi : index, clickedLi : target.id}, () => {
-      console.log(target);
-      console.log(`clicked li index is ${index}`);
-      console.log(target.id);
-      console.log(document.getElementById('gmimap' + this.state.clickedLi.toString()));
+    this.setState({clickedLi : target.id}, () => {
+      console.log(target.innerHTML);
+      let liTitle = target.innerHTML;
+      let targetMarker = this.state.markers.filter((marker) => marker.title === liTitle);
+      console.log(targetMarker[0].id);
       //simulate click on marker to open infowindow
-      document.getElementById('gmimap' + this.state.clickedLi.toString()).children[0].click();
-                                 
+      document.getElementById('gmimap' + targetMarker[0].id).children[0].click();
+
     })
   }
 
   render() {
 
-    
-
-        return (
+    return (
       <div className="App">
         {/* <header className="App-header">
           <h1 className="App-title">Museum Guide</h1>
