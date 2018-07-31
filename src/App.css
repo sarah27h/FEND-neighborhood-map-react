@@ -128,6 +128,11 @@
   left: 0;
 }
 
+.list_wrapper .infoMessage {
+  font-weight: bold;
+  color: #bb0404;
+}
+
 .list_wrapper .location_list {
   list-style: none;
   text-align: left;

@@ -7,7 +7,7 @@ export class LocationsList extends Component {
   
       console.log(this.props.locations);
   
-      if(this.props.query) {
+      if(this.props.query  && this.props.filteredLocations.length !== 0) {
         
             return (
                 <div className="list_wrapper">
@@ -27,6 +27,16 @@ export class LocationsList extends Component {
 
                 </div>
             )
+        } else if(this.props.query && this.props.filteredLocations.length === 0) {
+
+            return (
+                <div className="list_wrapper">
+                        
+                    <p className="infoMessage">No location found.</p>
+
+                </div>
+            )
+
         } else {
 
             return (
