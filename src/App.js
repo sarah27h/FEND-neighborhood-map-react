@@ -55,8 +55,8 @@ class App extends Component {
     this.setState({query : query}, () => {
 
       const match = new RegExp(escapeRegExp(this.state.query), 'i');
+
       if(this.state.query !== '') {
-        
         // add matched markers title to query to filteredMarkers and show them
         filteredMarkers = this.state.markers.filter( (marker) => (match.test(marker.title)));
         filteredMarkers.map((marker) => marker.setVisible(true));
@@ -68,6 +68,7 @@ class App extends Component {
         // add matched location title to query to filteredLocations
         
         filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
+        filteredLocations.sort(sortBy('title'));
         console.log(this.state.markers);
         console.log(filteredMarkers);
 
