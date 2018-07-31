@@ -72,19 +72,29 @@
   background-color: rgb(131, 0, 0);
 }
 
-.locations_section {
-  display:flex;
-}
 
-/* start locationList component */
-.location_filter {
-  padding: 20px;
+/* start locations_section */
+.locations_section {
+  display: flex;
+  flex-wrap: nowrap;
   background: #eee;
   width: 30%;
-  /* height: 96px; */
+  height: 100%;
+  overflow: scroll;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+/* start LocationFilter component */
+.location_filter {
+  padding: 20px;
+  width: 100%;
   /* transform: translate(-300px, 0); */
   -ms-flex-order: 2;
-  /* order: 2; */
+  order: 1;
   z-index: 10000;
   position: absolute;
   top: 0;
@@ -94,7 +104,6 @@
 .location_filter h2 {
   margin-bottom: 15px;
 }
-
 
 .location_filter .search_field {
   width: 100%;
@@ -108,17 +117,15 @@
 /* start locationList component */
 .list_wrapper {
   padding: 20px;
-  background: #eee;
-  width: 30%;
+  width: 100%;
   height: 100%;
   /* transform: translate(-300px, 0); */
   -ms-flex-order: 2;
   order: 2;
   z-index: 10000;
   position: absolute;
-  top: 107px;
+  top: 116px;
   left: 0;
-  overflow: scroll;
 }
 
 .list_wrapper .location_list {
