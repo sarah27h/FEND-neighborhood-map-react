@@ -29,7 +29,6 @@ export class MapContainer extends Component {
                 zoom: 12
             });
 
-            console.log(this.props.locations);
             // create infowindow to add it later to every marker when clicked
             let infowindow = new window.google.maps.InfoWindow();
             let markers = [];
@@ -71,9 +70,10 @@ export class MapContainer extends Component {
                           
                 // DON'T mutate the state
                 // means to update the state use setState()
-                markers.push(marker);
-                this.props.onUpdateMarkers(markers);           
+                markers.push(marker);              
             })
+
+            this.props.onUpdateMarkers(markers);
             
             // add a changable content based on which marker is clicked
             function makeInfoWindow(marker, infowindow) {
