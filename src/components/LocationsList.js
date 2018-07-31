@@ -32,7 +32,7 @@ export class LocationsList extends Component {
             return (
                 <div className="list_wrapper">
                         
-                    <p className="infoMessage">No location found.</p>
+                    <p className="infoMessage">No matched location found.</p>
 
                 </div>
             )
