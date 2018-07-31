@@ -3,6 +3,7 @@ import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header'
 import MapContainer from './components/MapContainer'
 import LocationFilter from './components/LocationFilter'
 import LocationsList from './components/LocationsList'
@@ -112,6 +113,8 @@ class App extends Component {
         {/* <header className="App-header">
           <h1 className="App-title">Museum Guide</h1>
         </header> */}
+
+        <Header />
 
         <MapContainer 
           locations={this.state.locations}

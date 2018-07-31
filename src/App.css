@@ -42,6 +42,21 @@
 }
 
 
+/* start Header component */
+.header {
+  width: 100%;
+  padding: 20px 0;
+  -ms-flex-order: 1;
+  order: 1;
+  z-index: 1000;
+  background: #fff;
+}
+
+.header h1{
+  margin: 0;
+}
+
+
 /* start MapContainer component */
 .mapWrapper {
   width: 70%;
