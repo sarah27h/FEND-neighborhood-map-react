@@ -7,10 +7,11 @@ export class LocationsList extends Component {
   
       console.log(this.props.locations);
   
-      if(this.props.query && this.props.filteredLocations.length < 15) {
+      if(this.props.query) {
+        
             return (
                 <div className="list_wrapper">
-
+                        
                         <ol className="location_list">
                             {this.props.filteredLocations.map((location, index) =>
 
