@@ -7,7 +7,7 @@ import scriptLoader from 'react-async-script-loader';
 export class MapContainer extends Component {
 
     state = {
-        markers : []
+        // markers : []
     }
     
     /* This methode base on this stackoverflow question and
@@ -32,7 +32,7 @@ export class MapContainer extends Component {
             console.log(this.props.locations);
             // create infowindow to add it later to every marker when clicked
             let infowindow = new window.google.maps.InfoWindow();
-
+            let markers = [];
             // add marker to every location
             
             this.setState( prevState => ({locations : prevState.locations}) )
@@ -45,6 +45,7 @@ export class MapContainer extends Component {
                     id: index
                 });
 
+                
                 // add click listener for every marker
                 marker.addListener('click', function() {
                     console.log(marker.get('id'), marker);
@@ -60,14 +61,18 @@ export class MapContainer extends Component {
                     }, 1500);
                     
                 })
+
+                
                 
                 // add every marker to this.state.markers array
                 // this.setState( prevState => (new: prevState.old.concat(marker)) )
-                this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
+                // this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
+    
                           
                 // DON'T mutate the state
                 // means to update the state use setState()
-                // this.state.markers.push(marker)              
+                markers.push(marker);
+                this.props.onUpdateMarkers(markers);           
             })
             
             // add a changable content based on which marker is clicked
@@ -97,17 +102,18 @@ export class MapContainer extends Component {
         console.log(this.state.markers);
         console.log(this.props.query);
 
-        if(this.props.query) {
-            const match = new RegExp(escapeRegExp(this.props.query), 'i');
-            filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
-            filteredMarkers.map((marker) =>marker.setVisible(false));
+        // if(this.props.query) {
+        //     const match = new RegExp(escapeRegExp(this.props.query), 'i');
+        //     filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
+        //     filteredMarkers.map((marker) =>marker.setVisible(false));
   
-            console.log(filteredMarkers);
+        //     console.log(filteredMarkers);
             
-          } else {
-            filteredMarkers = this.state.markers;
-            console.log(filteredMarkers);
-          }
+        //   } else if (this.state.query === '') {
+        //     filteredMarkers = this.state.markers;
+        //     this.state.markers.map((marker) =>marker.setVisible(true));
+        //     console.log(filteredMarkers);
+        //   }
   
         return(
             <div className="mapWrapper">

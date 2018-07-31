@@ -29,29 +29,50 @@ class App extends Component {
     ],
     clickedLi : undefined,
     query: '',
-    filteredLocations : []
+    filteredLocations : [],
+    markers : [],
+    filteredMarkers : []
   }
 
   markerclicked = (target) => {
       console.log(target);  
   }
 
+  updateMarkers = (markers) => {
+    this.setState({ markers : markers })
+    console.log(this.props.markers);
+
+  }
+
   updateQuery = (query) => {
-    let filteredLocations
+    let filteredLocations;
+    let filteredMarkers;
 
     this.setState({query : query}, () => {
 
-        if(this.state.query) {
+        if(this.state.query !== '') {
           const match = new RegExp(escapeRegExp(this.state.query), 'i');
           filteredLocations = this.state.locations.filter( (location) => match.test(location.title));
-          this.setState({filteredLocations : filteredLocations}, () => {
+
+          console.log(this.state.markers);          
+
+          filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
+          filteredMarkers.map((marker) => marker.setVisible(false));
+
+          console.log(filteredMarkers);
+          this.setState({filteredLocations : filteredLocations, filteredMarkers : filteredMarkers}, () => {
+            filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
+            filteredMarkers.map((marker) => marker.setVisible(true));
+            console.log(this.state.filteredMarkers);
             console.log(this.state.filteredLocations);
             console.log(this.state.locations);
           });
+
           
           
         } else if (this.state.query === '') {
-          this.setState({filteredLocations : this.state.locations}, () => {
+          this.setState({filteredLocations : this.state.locations, filteredMarkers : this.state.markers}, () => {
+            this.state.markers.map((marker) =>marker.setVisible(true));
             console.log(this.state.filteredLocations);
             console.log(this.state.locations);
           });
@@ -75,6 +96,8 @@ class App extends Component {
 
   render() {
 
+    
+
         return (
       <div className="App">
         {/* <header className="App-header">
@@ -86,6 +109,7 @@ class App extends Component {
           clickedLi={this.state.clickedLi}
           onMarkerclick={this.markerclicked}
           query={this.state.query}
+          onUpdateMarkers={this.updateMarkers}
         />
 
         <div className="locations_section">
