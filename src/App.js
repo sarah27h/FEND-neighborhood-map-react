@@ -33,7 +33,14 @@ class App extends Component {
     query: '',
     filteredLocations : [],
     markers : [],
-    filteredMarkers : []
+    filteredMarkers : [],
+    clickedMarker : []
+  }
+
+  markerPosition = (marker) => {
+    this.setState({ clickedMarker : marker }, () => {
+      console.log(this.state.marker);
+    })
   }
 
   markerclicked = (target) => {
@@ -116,16 +123,19 @@ class App extends Component {
 
 
   componentDidMount() {
-    fetch(
-      'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll=30.048218,31.233628&limit=1&v=20180801'
-    ).then(res => res.json())
-    .then(
-      (result) => {
-        console.log(result.response.venues[0].location.address)        
-        console.log(result.response.venues[0].location.formattedAddress.join(', '))
-      }
+    //test with static data for first location
+    // fetch(
+    //   'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll=30.048218,31.233628&' + 'query=' + this.state.locations[0].title + '&limit=1&v=20180801'
+    // ).then(res => res.json())
+    // .then(
+    //   (result) => {
+    //     //' + 'query=' + this.state.locations[0].title + '
+    //     console.log(result.response.venues[0].location);
+    //     console.log(result.response.venues[0].location.formattedAddress.join(', '));
+    //     console.log(this.state.locations[0].title);
+    //   }
      
-    )
+    // )
   }
 
 
@@ -145,6 +155,7 @@ class App extends Component {
           onMarkerclick={this.markerclicked}
           query={this.state.query}
           onUpdateMarkers={this.updateMarkers}
+          getMarkerPosition={this.markerPosition}
         />
 
         <div className="locations_section">

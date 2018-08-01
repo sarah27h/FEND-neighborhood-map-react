@@ -53,6 +53,8 @@ export class MapContainer extends Component {
                     setTimeout(function() { 
                         marker.setAnimation(null); 
                     }, 1500);
+                    console.log(marker);
+                    this.props.getMarkerPosition(marker);
                     
                 })
 
@@ -69,6 +71,7 @@ export class MapContainer extends Component {
             })
             
             this.props.onUpdateMarkers(markers);
+            
             
             // add a changable content based on which marker is clicked
             function makeInfoWindow(marker, infowindow) {
