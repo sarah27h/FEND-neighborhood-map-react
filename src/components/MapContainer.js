@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import escapeRegExp from 'escape-string-regexp'
 import scriptLoader from 'react-async-script-loader';
 
 
 
 export class MapContainer extends Component {
-
-    state = {
-        // markers : []
-    }
     
     /* This methode base on this stackoverflow question and
     * react-async-script-loader package
@@ -18,7 +13,7 @@ export class MapContainer extends Component {
     -to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require 
      * it help me to load Maps async
     */
-    componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
+    componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed, query }) {
         if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
 
           if (isScriptLoadSucceed) {
@@ -34,7 +29,7 @@ export class MapContainer extends Component {
             let markers = [];
             // add marker to every location
             
-            this.setState( prevState => ({locations : prevState.locations}) )
+            // this.setState( prevState => ({locations : prevState.locations}) )
 
             this.props.locations.map((location, index) => {
                 let marker = new window.google.maps.Marker({
@@ -72,14 +67,14 @@ export class MapContainer extends Component {
                 // means to update the state use setState()
                 markers.push(marker);              
             })
-
+            
             this.props.onUpdateMarkers(markers);
             
             // add a changable content based on which marker is clicked
             function makeInfoWindow(marker, infowindow) {
                 infowindow.setContent('<div>' + marker.title + '</div>' + '<button class="test"> View more about' + marker.title + '</button>');
                 
-                // link infowindow with map to show in and anchor  
+                // link infowindow with map and anchor to show in and with 
                 infowindow.open(map, marker);
                 // infowindow.addListener('closeclick', function() {
                 //     infowindow.setMarker(null);
@@ -99,7 +94,7 @@ export class MapContainer extends Component {
         let filteredMarkers = [];
 
         console.log(this.props.locations);
-        console.log(this.state.markers);
+        console.log(this.props.markers);
         console.log(this.props.query);
 
         // if(this.props.query) {
