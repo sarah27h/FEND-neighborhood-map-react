@@ -7,6 +7,7 @@ import Header from './components/Header'
 import MapContainer from './components/MapContainer'
 import LocationFilter from './components/LocationFilter'
 import LocationsList from './components/LocationsList'
+import Footer from './components/Footer'
 
 class App extends Component {
 
@@ -113,6 +114,7 @@ class App extends Component {
     })
   }
 
+
   render() {
 
     return (
@@ -132,7 +134,6 @@ class App extends Component {
         />
 
         <div className="locations_section">
-
           <LocationFilter 
             onUpdateQuery={this.updateQuery}
             query={this.state.query}
@@ -145,9 +146,9 @@ class App extends Component {
             query={this.state.query}
             filteredLocations={this.state.filteredLocations}
           />
-
         </div>
         
+        <Footer />
 
       </div>
     );
