@@ -112,6 +112,7 @@ export class MapContainer extends Component {
             // add a changable content based on which marker is clicked
             let makeInfoWindow = (marker, infowindow, fetchedData) => {
                 console.log(this.state.fetchedData);
+                console.log(this);
                 infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
                 
                 // link infowindow with map and anchor to show in and with 
