@@ -40,7 +40,7 @@ export class MapContainer extends Component {
                     title: location.title,
                     id: index
                 });
-
+                
                 
                 // add click listener for every marker
                 marker.addListener('click', () =>{
@@ -56,6 +56,7 @@ export class MapContainer extends Component {
                         marker.setAnimation(null); 
                     }, 1500);
                     console.log(marker);
+                    
                     // this.props.getMarkerPosition(marker);
                     
                 })
@@ -109,7 +110,7 @@ export class MapContainer extends Component {
 
 
             // add a changable content based on which marker is clicked
-            function makeInfoWindow(marker, infowindow, fetchedData) {
+            let makeInfoWindow = (marker, infowindow, fetchedData) => {
                 console.log(this.state.fetchedData);
                 infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
                 
