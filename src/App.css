@@ -56,6 +56,19 @@
   margin: 0;
 }
 
+.header .header__menu {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 1em;
+}
+
+.header .header__menu svg {
+  width: 32px;
+  fill: #E0E0E0;
+}
+
 
 /* start MapContainer component */
 .mapWrapper {
