@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Footer from './Footer'
 
 export class LocationsList extends Component {
 
@@ -25,6 +26,8 @@ export class LocationsList extends Component {
                         )}
                         </ol>
 
+                        <Footer />
+
                 </div>
             )
         } else if(this.props.query && this.props.filteredLocations.length === 0) {
@@ -33,7 +36,7 @@ export class LocationsList extends Component {
                 <div className="list_wrapper">
                         
                     <p className="infoMessage">No matched location found.</p>
-
+                    <Footer />
                 </div>
             )
 
@@ -55,6 +58,8 @@ export class LocationsList extends Component {
                             
                             )}
                         </ol>
+
+                        <Footer />
 
                 </div>
             )

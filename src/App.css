@@ -164,12 +164,7 @@
 .footer {
   width: 100%;
   padding: 10px 0;
-  position: absolute;
-  bottom: 0;
-  background: #fff;
   font-size: 14px;
-  order: 4;
-  z-index: 20000;
 }
 
 .footer p {
