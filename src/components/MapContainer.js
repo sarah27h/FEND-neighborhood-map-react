@@ -121,10 +121,14 @@ export class MapContainer extends Component {
                         makeInfoWindow(marker, infowindow);
                     })
                     // handle case: if fetch request fails or network issues
-                    .catch(error => 
-                        this.setState({ fetchedData : error.message + ' address data for this location :( try again' },
-                        // pass marker and infowindow to display error
-                         makeInfoWindow(marker, infowindow)))
+                    .catch(error =>
+                        //case when I delete from API key give me Cannot read property '0' of undefined
+                        this.setState({ fetchedData : error.message + ' address data for this location :( try again', isLoading : false}, () => {
+                                // pass marker and infowindow to display error
+                                makeInfoWindow(marker, infowindow)
+                            }
+                        
+                        ))
                 
             }
 
@@ -132,6 +136,7 @@ export class MapContainer extends Component {
             let makeInfoWindow = (marker, infowindow) => {
                 console.log(this.state.fetchedData);
                 console.log(this);
+                
                 infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
                 
                 // link infowindow with map to show in and with its anchor
