@@ -20,6 +20,7 @@ export class MapContainer extends Component {
 
           if (isScriptLoadSucceed) {
             console.log(this.state.fetchedData);
+
             // create our map add its center
             let map = new window.google.maps.Map(document.getElementById('map'), { 
                 center: {lat: 30.052635, lng: 31.236145},
@@ -29,10 +30,8 @@ export class MapContainer extends Component {
             // create infowindow to add it later to every marker when clicked
             let infowindow = new window.google.maps.InfoWindow();
             let markers = [];
-            // add marker to every location
-            
-            // this.setState( prevState => ({locations : prevState.locations}) )
 
+            // add marker to every location
             this.props.locations.map((location, index) => {
                 let marker = new window.google.maps.Marker({
                     map: map,
@@ -46,19 +45,18 @@ export class MapContainer extends Component {
                 marker.addListener('click', () =>{
                     console.log(marker.get('id'), marker);
                     console.log(marker.title);
+
+                    // call fecthData and pass clicked marker to fetch data based on its location
                     fecthData(marker);
-                    // makeInfoWindow(this, infowindow, fetchedData);
 
                     // animate clicked marker
                     marker.setAnimation(window.google.maps.Animation.BOUNCE);
+
                     // stop animation
                     setTimeout(function() { 
                         marker.setAnimation(null); 
                     }, 1500);
-                    console.log(marker);
-                    
-                    // this.props.getMarkerPosition(marker);
-                    
+
                 })
 
                 
@@ -77,49 +75,53 @@ export class MapContainer extends Component {
             
             // fetch data from FourSquare
             let fecthData = (marker) =>  {
-                let data;
-                console.log(marker);
+                let address;
                 let lat = marker.getPosition().lat();
                 let lng = marker.getPosition().lng();
-                console.log(lat, lng);
+                let url = 'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll='+ lat + ',' + lng + '&limit=1&v=20180801';
+                //' + 'query=' + this.state.locations[0].title + '
                 
-                //test with static data for first location
-                fetch(
-                  'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll='+ lat + ',' + lng + '&limit=1&v=20180801'
-                ).then(res => res.json())
-                .then(
-                  (result) => {
-                    //' + 'query=' + this.state.locations[0].title + '
-                    console.log(result.response.venues[0].location);
-                    data = result.response.venues[0].location.formattedAddress.join(', ');
-                    console.log(result.response.venues[0].location.formattedAddress.join(', '));
-                    console.log(this.state.fetchedData);
-                    
-                    this.setState({ fetchedData : data });
-                    console.log(this.state.fetchedData);
-                    makeInfoWindow(marker, infowindow, fetchedData);
-                    // infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
-                
-                    // // link infowindow with map and anchor to show in and with 
-                    // infowindow.open(map, marker);
-                  }
-                
-                )
+                //send request to fetch data from FourSquare API
+                fetch(url)
+                    .then( response => response.json())
+                    .then(result => {
+
+                        // store address data we want from result object
+                        address = result.response.venues[0].location.formattedAddress.join(', ');
+
+                        // handle case: if FourSquare have data we request or not
+                        if (address) {
+                            // update fetchedData state with data
+                            this.setState({ fetchedData : address });
+
+                        } else {
+                            this.setState({ fetchedData : 'Error :(' });
+                        }
+
+                        console.log(result.response.venues[0].location);
+                        console.log(result.response.venues[0].location.formattedAddress.join(', '));
+                        console.log(this.state.fetchedData);
+                        console.log(this.state.fetchedData);
+
+                        // pass marker and infowindow to display data
+                        makeInfoWindow(marker, infowindow);
+                    })
+                    // handle case: if fetch request fails or network issues
+                    .catch(error => 
+                        this.setState({ fetchedData : error.message + ' address data for this location :( try again' },
+                        // pass marker and infowindow to display error
+                         makeInfoWindow(marker, infowindow)))
                 
             }
 
-
             // add a changable content based on which marker is clicked
-            let makeInfoWindow = (marker, infowindow, fetchedData) => {
+            let makeInfoWindow = (marker, infowindow) => {
                 console.log(this.state.fetchedData);
                 console.log(this);
                 infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
                 
-                // link infowindow with map and anchor to show in and with 
+                // link infowindow with map to show in and with its anchor
                 infowindow.open(map, marker);
-                // infowindow.addListener('closeclick', function() {
-                //     infowindow.setMarker(null);
-                // })
                 
             }
 
