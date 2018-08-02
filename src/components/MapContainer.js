@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import scriptLoader from 'react-async-script-loader';
 
-
-
 export class MapContainer extends Component {
-    
+
+    state = {
+        fetchedData : ''
+    }
+
     /* This methode base on this stackoverflow question and
     * react-async-script-loader package
     * https://www.npmjs.com/package/react-async-script-loader
@@ -13,11 +15,11 @@ export class MapContainer extends Component {
     -to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require 
      * it help me to load Maps async
     */
-    componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed, query }) {
+    componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed, query, fetchedData }) {
         if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
 
           if (isScriptLoadSucceed) {
-            
+            console.log(this.state.fetchedData);
             // create our map add its center
             let map = new window.google.maps.Map(document.getElementById('map'), { 
                 center: {lat: 30.052635, lng: 31.236145},
@@ -41,11 +43,11 @@ export class MapContainer extends Component {
 
                 
                 // add click listener for every marker
-                marker.addListener('click', function() {
+                marker.addListener('click', () =>{
                     console.log(marker.get('id'), marker);
                     console.log(marker.title);
-
-                    makeInfoWindow(this, infowindow);
+                    fecthData(marker);
+                    // makeInfoWindow(this, infowindow, fetchedData);
 
                     // animate clicked marker
                     marker.setAnimation(window.google.maps.Animation.BOUNCE);
@@ -54,7 +56,7 @@ export class MapContainer extends Component {
                         marker.setAnimation(null); 
                     }, 1500);
                     console.log(marker);
-                    this.props.getMarkerPosition(marker);
+                    // this.props.getMarkerPosition(marker);
                     
                 })
 
@@ -72,10 +74,44 @@ export class MapContainer extends Component {
             
             this.props.onUpdateMarkers(markers);
             
-            
+            // fetch data from FourSquare
+            let fecthData = (marker) =>  {
+                let data;
+                console.log(marker);
+                let lat = marker.getPosition().lat();
+                let lng = marker.getPosition().lng();
+                console.log(lat, lng);
+                
+                //test with static data for first location
+                fetch(
+                  'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll='+ lat + ',' + lng + '&limit=1&v=20180801'
+                ).then(res => res.json())
+                .then(
+                  (result) => {
+                    //' + 'query=' + this.state.locations[0].title + '
+                    console.log(result.response.venues[0].location);
+                    data = result.response.venues[0].location.formattedAddress.join(', ');
+                    console.log(result.response.venues[0].location.formattedAddress.join(', '));
+                    console.log(this.state.fetchedData);
+                    
+                    this.setState({ fetchedData : data });
+                    console.log(this.state.fetchedData);
+                    makeInfoWindow(marker, infowindow, fetchedData);
+                    // infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
+                
+                    // // link infowindow with map and anchor to show in and with 
+                    // infowindow.open(map, marker);
+                  }
+                
+                )
+                
+            }
+
+
             // add a changable content based on which marker is clicked
-            function makeInfoWindow(marker, infowindow) {
-                infowindow.setContent('<div>' + marker.title + '</div>' + '<button class="test"> View more about' + marker.title + '</button>');
+            function makeInfoWindow(marker, infowindow, fetchedData) {
+                console.log(this.state.fetchedData);
+                infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + this.state.fetchedData + '</div>');
                 
                 // link infowindow with map and anchor to show in and with 
                 infowindow.open(map, marker);
