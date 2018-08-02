@@ -4,16 +4,18 @@ import scriptLoader from 'react-async-script-loader';
 export class MapContainer extends Component {
 
     state = {
-        fetchedData : ''
+        fetchedData : '',
+        isLoading : false
     }
 
-    /* This methode base on this stackoverflow question and
-    * react-async-script-loader package
-    * https://www.npmjs.com/package/react-async-script-loader
-    
-    https://stackoverflow.com/questions/41709765/how
-    -to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require 
-     * it help me to load Maps async
+    /* 
+        * This methode base on this stackoverflow question and
+        * react-async-script-loader package
+        * https://www.npmjs.com/package/react-async-script-loader
+        *
+        * https://stackoverflow.com/questions/41709765/how
+        -to-load-the-google-maps-api-script-in-my-react-app-only-when-it-is-require 
+        * it help me to load Maps async
     */
     componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed, query, fetchedData }) {
         if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
@@ -81,6 +83,18 @@ export class MapContainer extends Component {
                 let url = 'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll='+ lat + ',' + lng + '&limit=1&v=20180801';
                 //' + 'query=' + this.state.locations[0].title + '
                 
+                /*
+                    * I take just that its recommended to add message 'Loading ...'
+                    *  because fetch may take some time
+                    * to improve user experience
+                    * https://www.robinwieruch.de/react-fetching-data/
+                */
+                this.setState({ isLoading : true, fetchedData : 'Loading ...' }, () => {
+                        makeInfoWindow(marker, infowindow);
+                    }
+                );
+                
+
                 //send request to fetch data from FourSquare API
                 fetch(url)
                     .then( response => response.json())
@@ -92,7 +106,7 @@ export class MapContainer extends Component {
                         // handle case: if FourSquare have data we request or not
                         if (address) {
                             // update fetchedData state with data
-                            this.setState({ fetchedData : address });
+                            this.setState({ fetchedData : address, isLoading : false });
 
                         } else {
                             this.setState({ fetchedData : 'Error :(' });
