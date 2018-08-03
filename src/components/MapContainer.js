@@ -174,7 +174,7 @@ export class MapContainer extends Component {
   
         return(
             <div className="mapWrapper">
-                <div id="map" style={{height: "600px"}} onClick = {(e) => {this.props.onMarkerclick(e.target)}}>
+                <div id="map"  onClick = {(e) => {this.props.onMarkerclick(e.target)}}>
                 </div>
             </div>
         )

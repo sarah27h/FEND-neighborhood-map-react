@@ -22,7 +22,7 @@ class App extends Component {
       {title: 'Om Kalthoum Museum', location: {lat: 30.007673, lng: 31.225282}},
       {title: 'Cheops Boat Museum', location: {lat: 29.978258, lng: 31.134607}},
       {title: 'Imhotep Museum', location: {lat: 29.870606, lng: 31.225019}},
-      {title: 'Agricultural Museum', location: {lat: 30.046214, lng: 31.210697}},
+      // {title: 'Agricultural Museum', location: {lat: 30.046214, lng: 31.210697}},
       {title: 'Abdeen Palace Museum', location: {lat: 30.043375, lng: 31.247780}},
       {title: 'Gayer Anderson Museum', location: {lat: 30.028609, lng: 31.250744}},
       {title: 'Museum of Egyptian Modern Art', location: {lat: 30.043884, lng: 31.224628}},
@@ -102,6 +102,8 @@ class App extends Component {
     })
   }
 
+  
+  // get clicked li and then simulate click on marker to open infowindow
   handleClickedLi = (index, target) => {
     this.setState({clickedLi : target.id}, () => {
       console.log(target.innerHTML);
@@ -119,23 +121,6 @@ class App extends Component {
         }
       });
     })
-  }
-
-
-  componentDidMount() {
-    //test with static data for first location
-    // fetch(
-    //   'https://api.foursquare.com/v2/venues/search?client_id=F4JVCTXHB3C2Y1TOJFRQZEXGZI4JMGLFXF0G2ZZ10OEBFO5A&client_secret=M3K4KIBHLKEPXHU15VMWOMOAVBRGEG0M4RPX5X534HVZDRHC&ll=30.048218,31.233628&' + 'query=' + this.state.locations[0].title + '&limit=1&v=20180801'
-    // ).then(res => res.json())
-    // .then(
-    //   (result) => {
-    //     //' + 'query=' + this.state.locations[0].title + '
-    //     console.log(result.response.venues[0].location);
-    //     console.log(result.response.venues[0].location.formattedAddress.join(', '));
-    //     console.log(this.state.locations[0].title);
-    //   }
-     
-    // )
   }
 
 
