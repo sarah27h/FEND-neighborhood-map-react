@@ -8,12 +8,21 @@
 	box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 
 /* start App component */
 .App {
   display: flex;
   flex-wrap: nowrap;
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
