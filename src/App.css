@@ -20,7 +20,7 @@ body {
 /* start App component */
 .App {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   text-align: center;
   height: 100%;
 }
@@ -53,14 +53,13 @@ body {
 
 /* start Header component */
 .header {
-  width: 77%;
+  width: 100%;
   padding: 20px 0;
   -ms-flex-order: 1;
   order: 1;
   z-index: 1000;
   background: #fff;
   margin-left: auto;
-  position: relative;
 }
 
 .header h1{
@@ -83,13 +82,11 @@ body {
 
 /* start MapContainer component */
 .mapWrapper {
-  width: 77%;
+  width: 70%;
   height: 100%;
-  -ms-flex-order: 3;
   order: 3;
-  position: absolute;
-  right: 0;
-  top: 77px;
+  -ms-flex-order: 3;
+  margin-left: auto;
 }
 
 .mapWrapper .info_window {
@@ -100,10 +97,11 @@ body {
 
 /* start locations_section */
 .locations_section {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-order: 2;
+  order: 2;
   background: #eee;
   width: 70%;
   height: 100%;
@@ -112,7 +110,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  max-width: 300px;
+  max-width: 30%;
 }
 
 
@@ -124,9 +122,6 @@ body {
   -ms-flex-order: 2;
   order: 1;
   z-index: 10000;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .location_filter h2 {
@@ -150,10 +145,6 @@ body {
   /* transform: translate(-300px, 0); */
   -ms-flex-order: 2;
   order: 2;
-  z-index: 10000;
-  position: absolute;
-  top: 116px;
-  left: 0;
 }
 
 .list_wrapper .infoMessage {
