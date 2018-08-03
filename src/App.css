@@ -222,3 +222,10 @@ body {
     left: 35%;
   }
 }
+
+/* for very large screens */
+@media screen and (min-width: 1280px) {
+  .header .header_menu {
+    left: 23%;
+  }
+}
