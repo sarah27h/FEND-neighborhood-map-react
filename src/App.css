@@ -53,7 +53,7 @@ body {
 
 /* start Header component */
 .header {
-  width: 70%;
+  width: 77%;
   padding: 20px 0;
   -ms-flex-order: 1;
   order: 1;
@@ -83,12 +83,13 @@ body {
 
 /* start MapContainer component */
 .mapWrapper {
-  width: 70%;
+  width: 77%;
   height: 100%;
   -ms-flex-order: 3;
   order: 3;
   position: absolute;
   right: 0;
+  top: 77px;
 }
 
 .mapWrapper .info_window {
@@ -99,16 +100,19 @@ body {
 
 /* start locations_section */
 .locations_section {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   background: #eee;
-  width: 30%;
+  width: 70%;
   height: 100%;
   overflow: scroll;
   z-index: 10000;
   position: absolute;
   top: 0;
   left: 0;
+  max-width: 300px;
 }
 
 
