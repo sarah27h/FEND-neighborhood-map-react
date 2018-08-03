@@ -34,7 +34,8 @@ class App extends Component {
     filteredLocations : [],
     markers : [],
     filteredMarkers : [],
-    clickedMarker : []
+    clickedMarker : [],
+    listOpen: true
   }
 
   markerPosition = (marker) => {
@@ -102,7 +103,7 @@ class App extends Component {
     })
   }
 
-  
+
   // get clicked li and then simulate click on marker to open infowindow
   handleClickedLi = (index, target) => {
     this.setState({clickedLi : target.id}, () => {
@@ -124,7 +125,23 @@ class App extends Component {
   }
 
 
+  // methode to handle hamburger icon click
+  handleHamburgerClick = () => {
+    // by depending on prevState we turn our hamburger icon to toggle button 
+    this.setState((prevState) => { return {listOpen: !prevState.listOpen}});
+  }
+
   render() {
+    // to store classes for list wrapper
+    let listClasses;
+
+    if(!this.state.listOpen) {
+      // class to hide list
+      listClasses = 'locations_section hide'
+    } else {
+      // class to show list
+      listClasses = 'locations_section'
+    }
 
     return (
       <div className="App">
@@ -132,7 +149,9 @@ class App extends Component {
           <h1 className="App-title">Museum Guide</h1>
         </header> */}
 
-        <Header />
+        <Header
+          handleHamburgerClick={this.handleHamburgerClick}
+        />
 
         <MapContainer 
           locations={this.state.locations}
@@ -143,7 +162,7 @@ class App extends Component {
           getMarkerPosition={this.markerPosition}
         />
 
-        <div className="locations_section">
+        <div className={listClasses}>
           <LocationFilter 
             onUpdateQuery={this.updateQuery}
             query={this.state.query}
