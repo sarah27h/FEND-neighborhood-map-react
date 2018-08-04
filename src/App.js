@@ -176,7 +176,7 @@ class App extends Component {
           handleHamburgerClick={this.handleHamburgerClick}
         />
 
-        <div className={listClasses}>
+        <aside role="complementary" className={listClasses}>
           <LocationFilter 
             onUpdateQuery={this.updateQuery}
             query={this.state.query}
@@ -189,7 +189,7 @@ class App extends Component {
             query={this.state.query}
             filteredLocations={this.state.filteredLocations}
           />
-        </div>
+        </aside >
 
         <MapContainer 
           locations={this.state.locations}
