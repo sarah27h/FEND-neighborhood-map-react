@@ -16,9 +16,11 @@ export class LocationsList extends Component {
                         <ol className="location_list">
                             {this.props.filteredLocations.map((location, index) =>
 
-                                <li tabIndex="0" className="location_item" id={index} key={index} 
-                                    onClick={(e) => (this.props.onClicked(index, e.target))}>
-                                    
+                                <li role="button" tabIndex="0" className="location_item" id={index} key={index}
+                                    // handle mouse click event
+                                    onClick={(e) => (this.props.onClicked(index, e.target))}
+                                    // handle keypress event
+                                    onKeyPress={(e) =>  {if (e.key === " " || e.key === "Enter") {(this.props.onClicked(index, e.target))}}}>
                                     {location.title}
 
                                 </li>
@@ -49,8 +51,11 @@ export class LocationsList extends Component {
 
                             {this.props.locations.map((location, index) =>
 
-                                <li tabIndex="0" className="location_item" id={index} key={index} 
-                                    onClick={(e) => (this.props.onClicked(index, e.target))}>
+                                <li role="button" tabIndex="0" className="location_item" id={index} key={index} 
+                                    // handle mouse click event
+                                    onClick={(e) => (this.props.onClicked(index, e.target))} 
+                                    // handle keypress event
+                                    onKeyPress={(e) =>  {if (e.key === " " || e.key === "Enter") {(this.props.onClicked(index, e.target))}}} >
                                     
                                     {location.title}
 
