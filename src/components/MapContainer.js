@@ -139,7 +139,7 @@ export class MapContainer extends Component {
                 console.log(this.state.fetchedData);
                 console.log(this);
                 
-                infowindow.setContent('<div style="height: 5em !important; overflow-y: auto !important; width: 19em !important;">' +
+                infowindow.setContent('<div style="height: 5em; overflow-y: auto; width: 19em;">' +
                  '<p style="margin-bottom: 10px;font-weight: bold;font-size: 14px;">'  + marker.title + '</p>' +
                   '<p style="color: #002c94;font-weight: bold;font-size: 14px;">' + this.state.fetchedData + '</p>'+
                    '</div>' );
