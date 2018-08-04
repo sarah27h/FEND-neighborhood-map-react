@@ -74,7 +74,12 @@ body {
 
 .header .header_menu svg {
   width: 32px;
-  fill: #E0E0E0;
+  fill: #ddd;
+}
+
+.header .header_menu svg:hover {
+  width: 32px;
+  fill: #333;
 }
 
 
@@ -91,10 +96,11 @@ body {
   height: 600px;
 }
 
-.mapWrapper .info_window {
-  z-index: 99999;
-  background-color: rgb(131, 0, 0);
-}
+/* .gm-style .gm-style-iw {
+  height: 5em !important;
+  overflow-y: auto !important;
+  width: 19em !important;;
+} */
 
 
 /* start locations_section */
@@ -147,7 +153,6 @@ body {
 
 /* start locationList component */
 .list_wrapper {
-  padding: 20px;
   width: 100%;
   height: 100%;
   /* transform: translate(-300px, 0); */
@@ -166,9 +171,16 @@ body {
 }
 
 .list_wrapper .location_item {
-  margin: 10px 0;
-  padding: 10px;
+  margin: 0;
+  padding: 18px;
   background: #fff;
+  border-bottom: 2px solid #eee;
+  cursor: pointer;
+}
+
+.list_wrapper .location_item:hover {
+  background: #333;
+  color: #fff;
 }
 
 
