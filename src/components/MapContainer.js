@@ -140,8 +140,9 @@ export class MapContainer extends Component {
                 console.log(this);
                 
                 infowindow.setContent('<div style="height: 5em !important; overflow-y: auto !important; width: 19em !important;">' +
-                 '<p style="margin-bottom: 10px;">'  + marker.title + '</p>' +
-                  '<p>' + this.state.fetchedData + '</p>'+ '</div>' );
+                 '<p style="margin-bottom: 10px;font-weight: bold;font-size: 14px;">'  + marker.title + '</p>' +
+                  '<p style="color: #002c94;font-weight: bold;font-size: 14px;">' + this.state.fetchedData + '</p>'+
+                   '</div>' );
                 
                 // link infowindow with map to show in and with its anchor
                 infowindow.open(map, marker);
