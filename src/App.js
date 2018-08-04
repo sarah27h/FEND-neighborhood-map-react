@@ -128,7 +128,7 @@ class App extends Component {
           } else {
             areas.forEach(function(area) {
                   console.log(area);
-                  // for desktop devices check if marker is gmnoprint div contains 'title' 
+                  // for desktop devices check if marker is area contains 'title' 
                   if (area.getAttribute('title') === targetMarker[0].title){
                     //simulate click on marker to open infowindow
                     area.click();
