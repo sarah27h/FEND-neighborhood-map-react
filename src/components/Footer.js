@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 
-export class Footer extends Component {
-    render() {
+function Footer (props) {
   
-      return (
-          <div className="footer">
-              <p>Copyright © Museums Guide - data sources/APIs used Foursquare's API</p>
-          </div>
-      )
-    }
+    return (
+        <div className="footer">
+            <p>Copyright © Museums Guide - data sources/APIs used Foursquare's API</p>
+        </div>
+    )
+    
 }
 
 
