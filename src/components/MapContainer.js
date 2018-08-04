@@ -59,7 +59,7 @@ export class MapContainer extends Component {
 
                     // animate clicked marker
                     marker.setAnimation(window.google.maps.Animation.BOUNCE);
-
+                    // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
                     // stop animation
                     setTimeout(function() { 
                         marker.setAnimation(null); 
@@ -153,6 +153,22 @@ export class MapContainer extends Component {
           } 
         }
       }
+
+      componentDidMount() {
+        // handle API key error
+        //https://stackoverflow.com/questions/45633672/detect-query-limit-
+        //message-on-map-load-with-google-maps-javascript-api
+        window.gm_authFailure = () => {
+            let errorParagraph = document.createElement("P");
+            let mapWrapperDiv = document.querySelector('.mapWrapper');
+            // let map = document.getElementById('map');
+            console.log(document.querySelector('.mapWrapper'));
+            mapWrapperDiv.appendChild(errorParagraph);
+            mapWrapperDiv.insertBefore(errorParagraph, mapWrapperDiv.firstChild);
+            errorParagraph.setAttribute('class', 'error')
+            errorParagraph.innerHTML = 'Sorry, something went wrong with API key'
+        };
+      }
       
     
     render() {
@@ -162,19 +178,6 @@ export class MapContainer extends Component {
         console.log(this.props.locations);
         console.log(this.props.markers);
         console.log(this.props.query);
-
-        // if(this.props.query) {
-        //     const match = new RegExp(escapeRegExp(this.props.query), 'i');
-        //     filteredMarkers = this.state.markers.filter( (marker) => !(match.test(marker.title)));
-        //     filteredMarkers.map((marker) =>marker.setVisible(false));
-  
-        //     console.log(filteredMarkers);
-            
-        //   } else if (this.state.query === '') {
-        //     filteredMarkers = this.state.markers;
-        //     this.state.markers.map((marker) =>marker.setVisible(true));
-        //     console.log(filteredMarkers);
-        //   }
   
         return(
             <div className="mapWrapper">

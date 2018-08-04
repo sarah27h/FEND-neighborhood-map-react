@@ -96,6 +96,13 @@ body {
   order: 3;
   -ms-flex-order: 3;
   margin-left: auto;
+  background: #e0e0e0;
+}
+
+.error {
+  padding-top: 20px;
+  color: #fb3737;
+  font-size: 20px;
 }
 
 #map {
