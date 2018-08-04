@@ -75,7 +75,8 @@ export class MapContainer extends Component {
             
             this.props.onUpdateMarkers(markers);
             
-            // fetch data from FourSquare
+            // fetch data from FourSquare API
+            // https://developer.foursquare.com/
             let fecthData = (marker) =>  {
                 let address;
                 let lat = marker.getPosition().lat();
@@ -185,5 +186,7 @@ export class MapContainer extends Component {
 }
 
 export default scriptLoader(
+    // from google maps API
+    // https://www.google.com/maps
     ["https://maps.googleapis.com/maps/api/js?key=AIzaSyC8oJajiPzKCrwCSkGxQ1mnF9fMrXYGSlc&v=3"]
 )(MapContainer)
