@@ -171,21 +171,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* <header className="App-header">
-          <h1 className="App-title">Museum Guide</h1>
-        </header> */}
 
         <Header
           handleHamburgerClick={this.handleHamburgerClick}
-        />
-
-        <MapContainer 
-          locations={this.state.locations}
-          clickedLi={this.state.clickedLi}
-          onMarkerclick={this.markerclicked}
-          query={this.state.query}
-          onUpdateMarkers={this.updateMarkers}
-          getMarkerPosition={this.markerPosition}
         />
 
         <div className={listClasses}>
@@ -202,6 +190,15 @@ class App extends Component {
             filteredLocations={this.state.filteredLocations}
           />
         </div>
+
+        <MapContainer 
+          locations={this.state.locations}
+          clickedLi={this.state.clickedLi}
+          onMarkerclick={this.markerclicked}
+          query={this.state.query}
+          onUpdateMarkers={this.updateMarkers}
+          getMarkerPosition={this.markerPosition}
+        />
 
       </div>
     );
