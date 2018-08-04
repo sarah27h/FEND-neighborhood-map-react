@@ -120,11 +120,15 @@ body {
   left: 0;
   max-width: 300px;
   transform: translate(0);
-  transition: transform .5s ease; 
+  transition: transform .5s ease;
+  /* for A11y purposes to add it to tab order */
+  visibility: visible;
 }
 
 .locations_section.hide {
   transform: translate(-100%);
+  /* for A11y purposes to remove it to tab order */
+  visibility: hidden;
 }
 
 

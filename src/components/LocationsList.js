@@ -16,7 +16,7 @@ export class LocationsList extends Component {
                         <ol className="location_list">
                             {this.props.filteredLocations.map((location, index) =>
 
-                                <li className="location_item" id={index} key={index} 
+                                <li tabIndex="0" className="location_item" id={index} key={index} 
                                     onClick={(e) => (this.props.onClicked(index, e.target))}>
                                     
                                     {location.title}
@@ -45,11 +45,11 @@ export class LocationsList extends Component {
             return (
                 <div className="list_wrapper">
 
-                        <ol className="location_list">
+                        <ol  className="location_list">
 
                             {this.props.locations.map((location, index) =>
 
-                                <li className="location_item" id={index} key={index} 
+                                <li tabIndex="0" className="location_item" id={index} key={index} 
                                     onClick={(e) => (this.props.onClicked(index, e.target))}>
                                     
                                     {location.title}
