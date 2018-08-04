@@ -113,14 +113,40 @@ class App extends Component {
       console.log(targetMarker[0].id);
       console.log(targetMarker[0].title);
     
-      //simulate click on marker to open infowindow
+      //get map marker for mobile and desktop
+      let gmnoprints = document.querySelectorAll('div.gmnoprint');
       let areas = document.querySelectorAll('area');
-      areas.forEach(function(area) {
-        console.log(area);
-        if (area.getAttribute('title') === targetMarker[0].title){
-          area.click();
-        }
-      });
+
+        gmnoprints.forEach(function(gmnoprint) {
+          // for mobile devices check if marker is gmnoprint div contains 'title' 
+          if(gmnoprint.hasAttribute('title')) {
+            console.log(gmnoprint);
+            if (gmnoprint.getAttribute('title') === targetMarker[0].title){
+              //simulate click on marker to open infowindow
+              gmnoprint.click();
+            }
+          } else {
+            areas.forEach(function(area) {
+                  console.log(area);
+                  // for desktop devices check if marker is gmnoprint div contains 'title' 
+                  if (area.getAttribute('title') === targetMarker[0].title){
+                    //simulate click on marker to open infowindow
+                    area.click();
+                  }
+            });
+          }
+        });
+      // } else {
+      //   let areas = document.querySelectorAll('area');
+      //   areas.forEach(function(area) {
+      //     console.log(area);
+      //     if (area.getAttribute('title') === targetMarker[0].title){
+      //       area.click();
+      //     }
+      //   });
+      // }
+      
+      
     })
   }
 
