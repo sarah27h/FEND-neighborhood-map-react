@@ -70,6 +70,8 @@ body {
   top: -6px;
   padding: 1em;
   cursor: pointer;
+  background: transparent;
+  border: 0;
 }
 
 .header .header_menu svg {
@@ -79,6 +81,10 @@ body {
 
 .header .header_menu svg:hover {
   width: 32px;
+  fill: #333;
+}
+
+.header .header_menu:focus {
   fill: #333;
 }
 
