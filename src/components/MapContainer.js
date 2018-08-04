@@ -24,10 +24,16 @@ export class MapContainer extends Component {
             console.log(this.state.fetchedData);
 
             // create our map add its center
-            let map = new window.google.maps.Map(document.getElementById('map'), { 
+            let map = new window.google.maps.Map(document.getElementById('map'), {
                 center: {lat: 30.052635, lng: 31.236145},
                 zoom: 12
             });
+
+            // add title = "Google Maps" for map iframe when map is loaded
+            window.google.maps.event.addListenerOnce(map, 'idle', () => {
+                document.getElementsByTagName('iframe')[0].title = "Google Maps";
+            })
+            
 
             // create infowindow to add it later to every marker when clicked
             let infowindow = new window.google.maps.InfoWindow();
@@ -61,15 +67,6 @@ export class MapContainer extends Component {
 
                 })
 
-                
-                
-                // add every marker to this.state.markers array
-                // this.setState( prevState => (new: prevState.old.concat(marker)) )
-                // this.setState( prevState => ({markers : prevState.markers.concat(marker)}) )
-    
-                          
-                // DON'T mutate the state
-                // means to update the state use setState()
                 markers.push(marker);              
             })
             
@@ -149,6 +146,8 @@ export class MapContainer extends Component {
                 
             }
 
+            
+
           } else {
             // this.props.onError()
           } 
@@ -179,7 +178,7 @@ export class MapContainer extends Component {
   
         return(
             <div className="mapWrapper">
-                <div id="map"  onClick = {(e) => {this.props.onMarkerclick(e.target)}}>
+                <div id="map" aria-label="location" role="application" onClick = {(e) => {this.props.onMarkerclick(e.target)}}>
                 </div>
             </div>
         )
