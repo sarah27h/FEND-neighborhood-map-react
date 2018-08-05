@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header'
 import MapContainer from './components/MapContainer'
@@ -176,7 +175,7 @@ class App extends Component {
           handleHamburgerClick={this.handleHamburgerClick}
         />
 
-        <nav role="navigation" className={listClasses}>
+        <nav  className={listClasses}>
           <LocationFilter 
             onUpdateQuery={this.updateQuery}
             query={this.state.query}
