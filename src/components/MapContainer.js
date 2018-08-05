@@ -122,7 +122,7 @@ export class MapContainer extends Component {
                     // handle case: if fetch request fails or network issues
                     .catch(error =>
                         //case when I delete from API key give me Cannot read property '0' of undefined
-                        this.setState({ fetchedData : error.message + ' address data for this location :( try again', isLoading : false}, () => {
+                        this.setState({ fetchedData : 'Something went wrong failed to fetch address data for this location :( try again', isLoading : false}, () => {
                                 // pass marker and infowindow to display error
                                 makeInfoWindow(marker, infowindow)
                             }
