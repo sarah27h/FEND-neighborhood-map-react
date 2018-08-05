@@ -40,7 +40,7 @@ export class MapContainer extends Component {
             let markers = [];
 
             // add marker to every location
-            this.props.locations.map((location, index) => {
+            this.props.locations.forEach((location, index) => {
                 let marker = new window.google.maps.Marker({
                     map: map,
                     position: {lat: location.location.lat, lng: location.location.lng},
@@ -166,8 +166,6 @@ export class MapContainer extends Component {
       
     
     render() {
-        
-        let filteredMarkers = [];
 
         console.log(this.props.locations);
         console.log(this.props.markers);
