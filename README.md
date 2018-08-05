@@ -5,6 +5,7 @@ Neighborhood Map (Museums Guide) (React) (frontend-nanodegree)
 
 * [About the Project](#about-the-project)
 * [Installing Instructions](#installing-instructions)
+* [ Offline First ](#offline-first)
 * [Credits](#credits)
 * [License](#license)
 
@@ -23,8 +24,16 @@ For production mode
     - install `npm run build`
     - to serve with static Server
       - `npm install -g serve`
-      - `serve -s build`
+      - `serve -s build
+      - Local host at http://localhost:5000
 
+
+## Offline First
+
+Note: Service Worker works only in production mode
+- cd to project directory
+- Use `serve -s build`
+- Make sure you are in online mode (offline not selected)
 
 ## Credits
 
