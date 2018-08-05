@@ -155,7 +155,7 @@ export class MapContainer extends Component {
       }
 
       componentDidMount() {
-        // handle API key error
+        // handle API key error & query limit message
         //https://stackoverflow.com/questions/45633672/detect-query-limit-
         //message-on-map-load-with-google-maps-javascript-api
         window.gm_authFailure = () => {
