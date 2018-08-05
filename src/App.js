@@ -136,7 +136,7 @@ class App extends Component {
             });
           }
         });
-      // } else {
+        
       //   let areas = document.querySelectorAll('area');
       //   areas.forEach(function(area) {
       //     console.log(area);
@@ -176,7 +176,7 @@ class App extends Component {
           handleHamburgerClick={this.handleHamburgerClick}
         />
 
-        <aside role="complementary" className={listClasses}>
+        <nav role="navigation" className={listClasses}>
           <LocationFilter 
             onUpdateQuery={this.updateQuery}
             query={this.state.query}
@@ -189,7 +189,7 @@ class App extends Component {
             query={this.state.query}
             filteredLocations={this.state.filteredLocations}
           />
-        </aside >
+        </nav >
 
         <MapContainer 
           locations={this.state.locations}
