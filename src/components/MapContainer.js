@@ -110,12 +110,6 @@ export class MapContainer extends Component {
                             this.setState({ fetchedData : 'Error :(' });
                         }
 
-                        
-                        console.log(result.response.venues[0].location);
-                        console.log(result.response.venues[0].location.formattedAddress.join(', '));
-                        console.log(this.state.fetchedData);
-                        console.log(this.state.fetchedData);
-
                         // pass marker and infowindow to display data
                         makeInfoWindow(marker, infowindow);
                     })
