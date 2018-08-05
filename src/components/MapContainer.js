@@ -8,6 +8,17 @@ export class MapContainer extends Component {
         isLoading : false
     }
 
+    // method to display error message to use depends on the error
+    handleError = (message) => {
+        let errorParagraph = document.createElement("P");
+        let mapWrapperDiv = document.querySelector('.mapWrapper');
+        console.log(document.querySelector('.mapWrapper'));
+        mapWrapperDiv.appendChild(errorParagraph);
+        mapWrapperDiv.insertBefore(errorParagraph, mapWrapperDiv.firstChild);
+        errorParagraph.setAttribute('class', 'error')
+        errorParagraph.innerHTML = message;
+    }
+
     /* 
         * This methode base on this stackoverflow question and
         * react-async-script-loader package
@@ -140,10 +151,11 @@ export class MapContainer extends Component {
                 
             }
 
-            
-
           } else {
-            // this.props.onError()
+            // handle Google API script didn't load 
+            // to test that case pass an empty [""] 
+            // in the scriptLoader([""])([WrappedComponent])
+           this.handleError("Sorry, something went wrong script not loaded");
           } 
         }
       }
@@ -153,14 +165,7 @@ export class MapContainer extends Component {
         //https://stackoverflow.com/questions/45633672/detect-query-limit-
         //message-on-map-load-with-google-maps-javascript-api
         window.gm_authFailure = () => {
-            let errorParagraph = document.createElement("P");
-            let mapWrapperDiv = document.querySelector('.mapWrapper');
-            // let map = document.getElementById('map');
-            console.log(document.querySelector('.mapWrapper'));
-            mapWrapperDiv.appendChild(errorParagraph);
-            mapWrapperDiv.insertBefore(errorParagraph, mapWrapperDiv.firstChild);
-            errorParagraph.setAttribute('class', 'error')
-            errorParagraph.innerHTML = 'Sorry, something went wrong with API key'
+            this.handleError("Sorry, something went wrong with API key");
         };
       }
       
