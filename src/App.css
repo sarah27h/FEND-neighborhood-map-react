@@ -106,7 +106,10 @@ body {
 }
 
 #map {
-  height: 600px;
+  height: 90%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
 }
 
 /* .gm-style .gm-style-iw {
@@ -218,7 +221,7 @@ body {
 @media screen and (max-width: 321px) {
   
   #map {
-    height: 425px;
+    height: 88%;
   }
 
   .header .header_menu {
