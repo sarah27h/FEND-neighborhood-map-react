@@ -19,10 +19,12 @@ This project is part of the FEND Nanodegree and it is a single page application 
 - cd to your project directory then:
 
     For develoment mode
+
         - install all project dependencies with `npm install`
         - open project in browser and start the development server with `npm start`
 
     For production mode
+    
         - install `npm run build`
         - to serve with static Server
         - `npm install -g serve`
