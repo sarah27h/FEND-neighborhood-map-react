@@ -17,16 +17,17 @@ This project is part of the FEND Nanodegree and it is a single page application 
 
 - download zip folder or clone project > https://github.com/sarah27h/FEND-neighborhood-map-react.git
 - cd to your project directory then:
-For develoment mode
-    - install all project dependencies with `npm install`
-    - open project in browser and start the development server with `npm start`
 
-For production mode
-    - install `npm run build`
-    - to serve with static Server
-      - `npm install -g serve`
-      - `serve -s build
-      - Local host at http://localhost:5000
+    For develoment mode
+        - install all project dependencies with `npm install`
+        - open project in browser and start the development server with `npm start`
+
+    For production mode
+        - install `npm run build`
+        - to serve with static Server
+        - `npm install -g serve`
+        - `serve -s build
+        - Local host at http://localhost:5000
 
 
 ## Offline First
