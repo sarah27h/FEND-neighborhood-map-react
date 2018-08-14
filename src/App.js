@@ -114,7 +114,7 @@ class App extends Component {
     
     // a hack for IE11 to work with NodeList.forEach
     // to get ride of this error Object doesn't support property or method 'forEach'
-		NodeList.prototype.forEach = Array.prototype.forEach
+		NodeList.prototype.forEach = Array.prototype.forEach;
 		
       //get map marker for mobile and desktop
       let gmnoprints = document.querySelectorAll('div.gmnoprint');
